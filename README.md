@@ -1,73 +1,59 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend for my Cher CRM full-stack assignment. It’s built with React, TypeScript, Vite, and connects to a FastAPI backend for user authentication, lead management, activities, and dashboard statistics.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The frontend handles all client-side interactions, connects securely to the backend API, and displays data in a clean and minimal interface. Because of time constraints, I focused on building the authentication flow and testing core endpoints like register, login, get profile, and view leads.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- React + TypeScript + Vite – for a fast and modular frontend setup  
+- Axios – to handle API requests  
+- React Router DOM – for routing pages  
+- React Hook Form – for managing form inputs  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Running Locally
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+```bash
+# 1. Clone the repo
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 2. Install dependencies
+npm install
+
+# 3. Create an .env file
+VITE_API_URL=<backend link>
+
+# 4. Run development server
+npm run dev
+
+# 5. Build for production
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## What I learnt
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Handling authentication and token management between FastAPI and React
+- Setting up protected routes and making API calls with Axios
+- Using environment variables correctly in Vite
+- Understanding TypeScript differences from JavaScript
+- Deploying a full-stack app with Netlify (frontend) and Render (backend)
+
+---
+
+## Challenges
+
+- Understanding the relationship between Pydantic and SQLAlchemy models
+- Fixing authentication issues with OAuth2PasswordBearer
+- Using environment variables correctly in Vite
+- Managing CORS and API tokens
+- Limited time to refine frontend styling and dashboard
+
+---
+
+This project showed me multiple ways of backend development, and helped me connect both backend and frontend more confidently. Although the dashboard and design are not fully polished, the core logic of the assignment works. If granted extension, I plan to improve the dashboard UI, connect leads and activity forms, add charts and pagination

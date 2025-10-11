@@ -1,27 +1,40 @@
 import { api } from "./client";
-import type { Lead, LeadCreate, LeadUpdate } from "../types";
+
+export type Lead = {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  status: string;
+  source: string;
+  budget_min?: number | null;
+  budget_max?: number | null;
+  property_interest?: string | null;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+  activity_count: number;
+};
+
+export type LeadCreate = {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  status?: string;
+  source?: string;
+  budget_min?: number | null;
+  budget_max?: number | null;
+  property_interest?: string | null;
+};
 
 export async function listLeads(skip = 0, limit = 20): Promise<Lead[]> {
-  const res = await api.get<Lead[]>(`/leads`, { params: { skip, limit } });
+  const res = await api.get<Lead[]>("/leads", { params: { skip, limit } });
   return res.data;
 }
 
-export async function createLead(data: LeadCreate): Promise<Lead> {
-  const res = await api.post<Lead>("/leads", data);
-  return res.data;
-}
-
-export async function getLead(id: number): Promise<Lead> {
-  const res = await api.get<Lead>(`/leads/${id}`);
-  return res.data;
-}
-
-export async function updateLead(id: number, data: LeadUpdate): Promise<Lead> {
-  const res = await api.patch<Lead>(`/leads/${id}`, data);
-  return res.data;
-}
-
-export async function deleteLead(id: number): Promise<{ detail: string }> {
-  const res = await api.delete<{ detail: string }>(`/leads/${id}`);
+export async function createLead(body: LeadCreate): Promise<Lead> {
+  const res = await api.post<Lead>("/leads", body);
   return res.data;
 }

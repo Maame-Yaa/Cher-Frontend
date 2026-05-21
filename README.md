@@ -1,59 +1,62 @@
+# Cher CRM Frontend
 
-This is the frontend for my Cher CRM full-stack assignment. It’s built with React, TypeScript, Vite, and connects to a FastAPI backend for user authentication, lead management, activities, and dashboard statistics.
+A minimal React + TypeScript frontend for the [Cher CRM Backend](https://github.com/Maame-Yaa/Cher-Backend). Built as part of a full-stack developer technical assessment for [Cher](https://cheralpha.com).
 
----
+This frontend serves as a functional test interface for the backend API. I focused my time on the backend (FastAPI, JWT auth, CRUD, analytics) and built this to verify API integration end-to-end.
 
-The frontend handles all client-side interactions, connects securely to the backend API, and displays data in a clean and minimal interface. Because of time constraints, I focused on building the authentication flow and testing core endpoints like register, login, get profile, and view leads.
+## Tech stack
 
----
+- **Framework:** React 18 + TypeScript
+- **Build tool:** Vite
+- **HTTP client:** Axios with JWT token interceptor
+- **Routing:** Single-page (no React Router, all sections on one page)
 
-## Tech Stack
+## What it covers
 
-- React + TypeScript + Vite – for a fast and modular frontend setup  
-- Axios – to handle API requests  
-- React Router DOM – for routing pages  
-- React Hook Form – for managing form inputs  
+- User registration and login (JWT stored in localStorage)
+- Axios client with automatic `Authorization: Bearer` header injection
+- Lead creation form and lead listing
+- Dashboard stats loading (total leads, leads by status, recent activities)
+- Typed API layer (`api/auth.ts`, `api/leads.ts`, `api/activities.ts`, `api/dashboard.ts`)
+- TypeScript interfaces for all API request/response shapes
 
----
+## Project structure
 
-## Running Locally
-
-```bash
-# 1. Clone the repo
-
-# 2. Install dependencies
-npm install
-
-# 3. Create an .env file
-VITE_API_URL=<backend link>
-
-# 4. Run development server
-npm run dev
-
-# 5. Build for production
-npm run build
+```
+src/
+├── App.tsx                # Main page with auth, leads, and dashboard sections
+├── api/
+│   ├── client.ts          # Axios instance with base URL and token interceptor
+│   ├── auth.ts            # Login, register, me, logout
+│   ├── leads.ts           # List and create leads
+│   ├── activities.ts      # Activity API calls
+│   └── dashboard.ts       # Dashboard stats
+├── pages/
+│   ├── LoginPage.tsx
+│   ├── LeadsPage.tsx
+│   ├── ActivitiesPage.tsx
+│   └── DashboardPage.tsx
+└── types/
+    └── index.ts           # Shared TypeScript interfaces
 ```
 
----
+## Running locally
 
-## What I learnt
+```bash
+git clone https://github.com/Maame-Yaa/Cher-Frontend.git
+cd Cher-Frontend
 
-- Handling authentication and token management between FastAPI and React
-- Setting up protected routes and making API calls with Axios
-- Using environment variables correctly in Vite
-- Understanding TypeScript differences from JavaScript
-- Deploying a full-stack app with Netlify (frontend) and Render (backend)
+npm install
+npm run dev
+```
 
----
+Create a `.env` file:
+```
+VITE_API_URL=http://localhost:8000
+```
 
-## Challenges
+The backend must be running for API calls to work. See [Cher-Backend](https://github.com/Maame-Yaa/Cher-Backend) for setup.
 
-- Understanding the relationship between Pydantic and SQLAlchemy models
-- Fixing authentication issues with OAuth2PasswordBearer
-- Using environment variables correctly in Vite
-- Managing CORS and API tokens
-- Limited time to refine frontend styling and dashboard
+## Context
 
----
-
-This project showed me multiple ways of backend development, and helped me connect both backend and frontend more confidently. Although the dashboard and design are not fully polished, the core logic of the assignment works. If granted extension, I plan to improve the dashboard UI, connect leads and activity forms, add charts and pagination
+This was part of a 48-hour take-home assignment. The frontend is intentionally minimal. I prioritized backend architecture (authentication, data modeling, dashboard analytics) over frontend polish. The typed API client layer and auth flow demonstrate the integration pattern, and the pages directory contains the start of a multi-page layout I ran out of time to complete.
